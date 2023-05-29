@@ -1,5 +1,5 @@
 //jshint esversion:6
-
+require('dotenv').config()
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://naveenvashistha2000:9809triggg@cluster0.fygzlpi.mongodb.net/blogsDB",{ useUnifiedTopology: true, useNewUrlParser: true  });
+mongoose.connect(process.env.MONGO_URI,{ useUnifiedTopology: true, useNewUrlParser: true  });
 const blogsSchema = {
   title: {
     type:String,
@@ -81,6 +81,6 @@ app.post("/",function(req,res){
 
 
 
-app.listen(3000, function() {
+app.listen(process.env.PORT||3000, function() {
   console.log("Server started on port 3000");
 });

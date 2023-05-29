@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/blogsDB",{useNewUrlParser:true});
+mongoose.connect("mongodb+srv://naveenvashistha2000:9809triggg@cluster0.fygzlpi.mongodb.net/blogsDB",{ useUnifiedTopology: true, useNewUrlParser: true  });
 const blogsSchema = {
   title: {
     type:String,
@@ -37,8 +37,6 @@ let startingContent = {
 
 app.get("/",function(req,res){
   blogs.find({},function(err,results){
-    console.log(results);
-    console.log(err);
     if(!err){
     res.render("home",{first:startingContent,mainContent:results});
 }
